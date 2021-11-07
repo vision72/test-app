@@ -1,35 +1,61 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TextInput, Dimensions, Button } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, Dimensions, Alert } from 'react-native';
+
+import { ContactService } from '../../redux/services';
 
 export default function ContactUs() {
-	// TODO: add your code here.
-	// create a contact us form with 4 fields
-	// with all the necessary validations,
-	// fields will be Name, Mobile Number, Email, and message, and a submit button
+	const [ name, setName ] = useState('');
+	const [ email, setEmail ] = useState('');
+	const [ mobile, setMobile ] = useState('');
+	const dispatch = useDispatch();
 
-	// const [ name, setName ] = useState('');
-	// const nameHandler = () => {
-	// setName('name');
-	// };
+	const contactUs = () => {
+		if (name.length < 3 || email < 3 || mobile.length < 3) {
+			Alert.alert('Please fill all the details');
+			return;
+		}
+		let email_reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+		let mobile_reg = /\+?\d[\d -]{8,12}\d/;
+		if (email_reg.test(email) && mobile_reg.test(mobile)) {
+			dispatch(ContactService({ email }));
+		} else {
+			Alert.alert('Aborting... email/phone incorrect');
+			return;
+		}
+	};
 
 	return (
 		<View style={styles.container}>
-			<Text
-				style={{
-					alignItems: 'center',
-					fontWeight: 'bold',
-					fontSize: 50,
-					paddingTop: 20,
-					color: '#d9d9d9'
-				}}
-			>
-				Contact Us
-			</Text>
-			<TextInput placeholder="Name" style={styles.name} />
-			<TextInput placeholder="Email" style={styles.name} />
-			<TextInput placeholder="Mobile Number" style={styles.name} />
-			<View style={styles.button}>
-				<Button title="Submit" />
+			<View style={styles.formContainer}>
+				<Text style={styles.heading}>Contact Us</Text>
+				<TextInput
+					placeholder={'Full Name'}
+					placeholderTextColor={'#D9D9D9'}
+					value={name}
+					onChangeText={setName}
+					style={styles.input}
+					keyboardType={'name-phone-pad'}
+				/>
+				<TextInput
+					placeholder={'Email Address'}
+					placeholderTextColor={'#D9D9D9'}
+					value={email}
+					onChangeText={setEmail}
+					style={styles.input}
+					keyboardType={'email-address'}
+				/>
+				<TextInput
+					placeholder={'Mobile Number'}
+					placeholderTextColor={'#D9D9D9'}
+					value={mobile}
+					onChangeText={setMobile}
+					keyboardType={'number-pad'}
+					style={styles.input}
+				/>
+				<TouchableOpacity onPress={contactUs} style={styles.button}>
+					<Text style={{ fontSize: 14 }}>Contact Us</Text>
+				</TouchableOpacity>
 			</View>
 		</View>
 	);
@@ -37,22 +63,39 @@ export default function ContactUs() {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'flex-start'
+		flex: 1
 	},
-	text: {
-		fontSize: 24,
+	formContainer: {
+		elevation: 5,
+		borderRadius: 8,
+		paddingVertical: 32,
+		paddingHorizontal: 16,
+		backgroundColor: '#FCFCFC',
+		top: Dimensions.get('window').height / 5
+	},
+	heading: {
+		fontSize: 42,
+		color: '#5bc0de',
 		fontWeight: 'bold'
 	},
-	name: {
-		margin: 16,
-		borderBottomWidth: 1,
-		width: Dimensions.get('screen').width / 1.3
+	image: {
+		width: 20,
+		height: 20,
+		resizeMode: 'cover'
+	},
+	input: {
+		margin: 12,
+		color: '#000',
+		borderBottomWidth: 1
 	},
 	button: {
-		alignSelf: 'flex-start',
+		padding: 16,
+		elevation: 5,
+		marginTop: 24,
+		borderRadius: 8,
 		fontWeight: 'bold',
-		backgroundColor: '#b8860b'
+		marginHorizontal: 12,
+		alignSelf: 'flex-end',
+		backgroundColor: '#5bc0de'
 	}
 });

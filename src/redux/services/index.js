@@ -1,16 +1,13 @@
-import emailjs from 'emailjs-com';
+import { API_URL } from '../../utils';
+import { contactSubmit } from '../slices';
 
-import { contactSubmit } from '../slices/contact.slice';
-
-export const ContactUs = ({ email }) => (dispatch) => {
+export const ContactService = ({ email }) => (dispatch) => {
 	try {
-		// dispatch payload to reducer.
-		// dispatch(contactSubmit());
-		emailjs
-			.sendForm(`gmail`, API_DETAILS.TEMPLATE_ID, email, API_DETAILS.USER_ID)
-			.then((result) => dispatch(contactSubmit(result.text)))
+		// dispatch payload & update the reducer.
+		fetch(`${API_URL}?email=${email}`)
+			.then((response) => dispatch(contactSubmit(response.json())))
 			.catch((error) => console.error(error));
-	} catch (e) {
-		return console.error(e);
+	} catch (error) {
+		return console.error(error);
 	}
 };

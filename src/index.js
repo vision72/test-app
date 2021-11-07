@@ -15,18 +15,15 @@ import { AppLayout } from './layout';
 import { ContactUs, ThankYou } from './pages';
 
 // rather than using react-navigation & making the application heavy,
-// I thought to go ahead and use states just to switch between tabs
+// I thought to go ahead and use states just to switch between tabs.
+// For pages, checkout AppLayout component
 export default function App() {
 	return (
-		<SafeAreaView style={styles.container}>
-			<Provider store={store}>
-				{/* since anyone can contact us, 
-                there is no need for private routes. */}
-				<AppLayout>
-					<ContactUs />
-				</AppLayout>
-			</Provider>
-		</SafeAreaView>
+		<Provider store={store}>
+			<SafeAreaView style={styles.container}>
+				<AppLayout customStyles={{ backgroundColor: '#7795' }} />
+			</SafeAreaView>
+		</Provider>
 	);
 }
 

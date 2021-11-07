@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const contactSlice = createSlice({
 	name: 'contact',
 	initialState: {
-		submitted: null
+		submitted: false
 	},
 	reducers: {
-		contactSubmit: (state, payload) => {
-			state.submitted = action.payload;
+		contactSubmit: (state, action) => {
+			state.submitted = true;
 		}
 	}
 });
