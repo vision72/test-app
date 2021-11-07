@@ -46,13 +46,12 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold'
 	},
 	name: {
+		margin: 16,
 		borderBottomWidth: 1,
-		borderColor: '#000000',
-		margin: 20,
-		width: Dimensions.get('screen').width / 1.3,
-		padding: 10
+		width: Dimensions.get('screen').width / 1.3
 	},
 	button: {
+		alignSelf: 'flex-start',
 		fontWeight: 'bold',
 		backgroundColor: '#b8860b'
 	}
