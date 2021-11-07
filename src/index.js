@@ -18,15 +18,15 @@ import { ContactUs, ThankYou } from './pages';
 // I thought to go ahead and use states just to switch between tabs
 export default function App() {
 	return (
-		<Provider store={store}>
-			<SafeAreaView style={styles.container}>
+		<SafeAreaView style={styles.container}>
+			<Provider store={store}>
 				{/* since anyone can contact us, 
                 there is no need for private routes. */}
 				<AppLayout>
 					<ContactUs />
 				</AppLayout>
-			</SafeAreaView>
-		</Provider>
+			</Provider>
+		</SafeAreaView>
 	);
 }
 

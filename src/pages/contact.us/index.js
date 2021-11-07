@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, TextInput, Dimensions, Button } from 'react-native';
 
 export default function ContactUs() {
 	// TODO: add your code here.
@@ -7,9 +7,30 @@ export default function ContactUs() {
 	// with all the necessary validations,
 	// fields will be Name, Mobile Number, Email, and message, and a submit button
 
+	// const [ name, setName ] = useState('');
+	// const nameHandler = () => {
+	// setName('name');
+	// };
+
 	return (
 		<View style={styles.container}>
-			<Text style={styles.text}>Contact us Page.</Text>
+			<Text
+				style={{
+					alignItems: 'center',
+					fontWeight: 'bold',
+					fontSize: 50,
+					paddingTop: 20,
+					color: '#d9d9d9'
+				}}
+			>
+				Contact Us
+			</Text>
+			<TextInput placeholder="Name" style={styles.name} />
+			<TextInput placeholder="Email" style={styles.name} />
+			<TextInput placeholder="Mobile Number" style={styles.name} />
+			<View style={styles.button}>
+				<Button title="Submit" />
+			</View>
 		</View>
 	);
 }
@@ -18,10 +39,21 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'flex-start'
 	},
 	text: {
 		fontSize: 24,
 		fontWeight: 'bold'
+	},
+	name: {
+		borderBottomWidth: 1,
+		borderColor: '#000000',
+		margin: 20,
+		width: Dimensions.get('screen').width / 1.3,
+		padding: 10
+	},
+	button: {
+		fontWeight: 'bold',
+		backgroundColor: '#b8860b'
 	}
 });
