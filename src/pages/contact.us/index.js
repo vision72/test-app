@@ -46,11 +46,11 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold'
 	},
 	name: {
+		margin: 20,
+		padding: 10,
 		borderBottomWidth: 1,
 		borderColor: '#000000',
-		margin: 20,
-		width: Dimensions.get('screen').width / 1.3,
-		padding: 10
+		width: Dimensions.get('screen').width / 1.3
 	},
 	button: {
 		fontWeight: 'bold',
